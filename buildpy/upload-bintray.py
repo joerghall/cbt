@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 #
-# https://github.com/joerghall/sourcesfs
+# https://github.com/joerghall/cbt
 #
 from __future__ import print_function
 
