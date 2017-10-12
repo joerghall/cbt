@@ -27,6 +27,6 @@ cmake_minimum_required(VERSION 3.0)
 
 if(NOT TARGET bintray_upload)
     add_custom_target(bintray_upload
-        COMMAND ${CMAKE_SOURCE_DIR}/buildtools/buildpy/upload-bintray.py --path ${CMAKE_BINARY_DIR}/packages --repository joerghall
+        COMMAND ${BUILD_TOOLS}/buildpy/upload-bintray.py --path ${CMAKE_BINARY_DIR}/packages --repository joerghall
     )
 endif()
