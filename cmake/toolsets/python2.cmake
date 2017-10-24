@@ -24,9 +24,14 @@
 #
 cmake_minimum_required(VERSION 3.0)
 
-
-if (NOT TARGET bintray_upload)
-    add_custom_target(bintray_upload COMMAND
-        ${python2_BIN} ${BUILD_TOOLS}/buildpy/upload-bintray.py --path ${CMAKE_BINARY_DIR}/packages --repository joerghall
-    )
-endif ()
+if(python2_LOCATION)
+    if(BUILD_WINDOWS)
+        set(python2_BIN ${python2_LOCATION}/python.exe)
+    elseif(BUILD_POSIX)
+        set(python2_BIN ${python2_LOCATION}/bin/python2)
+    else()
+        message(FATAL_ERROR "Unknown build configurion")
+    endif()
+else()
+    message(FATAL_ERROR "Package python2 no found")
+endif()

@@ -24,7 +24,10 @@
 #
 cmake_minimum_required(VERSION 3.0)
 
+list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/artifacts")
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/components")
+list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/toolsets")
+
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}")
 
 get_filename_component(temp_file_path ${CMAKE_CURRENT_LIST_DIR}/.. REALPATH)
@@ -56,3 +59,7 @@ endif ()
 
 include(version)
 include(sourcemapprefix)
+include(artifactdownload)
+include(artifactcache)
+
+setup_artifact_cache()

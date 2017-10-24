@@ -36,7 +36,7 @@ cmake_minimum_required(VERSION 3.0)
 #
 function(discover_source_version)
 
-    execute_process(COMMAND ${BUILD_TOOLS}/buildpy/get-version-info.py --source_path ${CMAKE_SOURCE_DIR}
+    execute_process(COMMAND ${python2_BIN} ${BUILD_TOOLS}/buildpy/get-version-info.py --source_path ${CMAKE_SOURCE_DIR}
         WORKING_DIRECTORY ${BUILD_TOOLS}/buildpy
         RESULT_VARIABLE VERSION_RESULT
         OUTPUT_VARIABLE VERSION_DATA
