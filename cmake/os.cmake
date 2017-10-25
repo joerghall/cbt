@@ -26,7 +26,6 @@ cmake_minimum_required(VERSION 3.0)
 
 if (WIN32)
 
-    message(FATAL_ERROR "Unsupported OS version - Windows")
     set(BUILD_OS windows CACHE STRING "Build operating system" FORCE)
     set(BUILD_WINDOWS 1 CACHE STRING "Builds windows" FORCE)
 

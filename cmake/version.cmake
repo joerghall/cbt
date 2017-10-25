@@ -34,6 +34,8 @@ cmake_minimum_required(VERSION 3.0)
 # release_<major>_<minor> => <major>.<minor>.<revision>.r<shaa[0:8]>
 # => 0.0.<revision>.r<shaa[0:8]>
 #
+include(python2)
+
 function(discover_source_version)
 
     execute_process(COMMAND ${python2_BIN} ${BUILD_TOOLS}/buildpy/get-version-info.py --source_path ${CMAKE_SOURCE_DIR}
