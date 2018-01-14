@@ -82,5 +82,5 @@ setup_artifact_cache()
 #    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.1/pigz-2.3.4-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.4/linux" "pigz-2.3.4-windows.tgz")
 #endif()
 
-include(version)
-include(sourcemapprefix)
+#include(version)
+#include(sourcemapprefix)
