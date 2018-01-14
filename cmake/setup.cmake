@@ -30,6 +30,13 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/toolsets")
 
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}")
 
+#
+set(cbt_LOCATION ${CMAKE_CURRENT_LIST_DIR} CACHE PATH "CBT root location" FORCE)
+
+#
+set(download_COMMAND ${cbt_LOCATION}/scripts/download-command.cmake)
+set(untar_COMMAND ${cbt_LOCATION}/scripts/untar-command.cmake)
+
 get_filename_component(temp_file_path ${CMAKE_CURRENT_LIST_DIR}/.. REALPATH)
 set(BUILD_TOOLS ${temp_file_path} CACHE PATH "Location of the buildtools" FORCE)
 
@@ -61,19 +68,19 @@ include(artifactdownload)
 include(artifactcache)
 setup_artifact_cache()
 
-if(BUILD_WINDOWS)
-    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python2-2.7.14-windows-x64.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python2/2.7.14/windows-x64" "python2-2.7.14-windows-x64.tgz")
-    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-windows.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/windows" "ninja-1.8.2-windows.tgz")
-    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.1/pigz-2.3.1-windows.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.1/windows" "pigz-2.3.1-windows.tgz")
-elseif(BUILD_OSX)
-    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python-2.7.14-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python/2.7.14/osx" "python-2.7.14-osx.tgz")
-    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/osx" "ninja-1.8.2-osx.tgz")
-    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.4/pigz-2.3.4-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.4/osx" "pigz-2.3.4-osx.tgz")
-elseif(BUILD_LINUX)
-    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python-2.7.14-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python/2.7.14/linux" "python-2.7.14-linux.tgz")
-    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/linux" "ninja-1.8.2-windows.tgz")
-    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.1/pigz-2.3.4-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.4/linux" "pigz-2.3.4-windows.tgz")
-endif()
+#if(BUILD_WINDOWS)
+#    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python2-2.7.14-windows-x64.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python2/2.7.14/windows-x64" "python2-2.7.14-windows-x64.tgz")
+#    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-windows.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/windows" "ninja-1.8.2-windows.tgz")
+#    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.1/pigz-2.3.1-windows.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.1/windows" "pigz-2.3.1-windows.tgz")
+#elseif(BUILD_OSX)
+#    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python-2.7.14-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python/2.7.14/osx" "python-2.7.14-osx.tgz")
+#    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/osx" "ninja-1.8.2-osx.tgz")
+#    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.4/pigz-2.3.4-osx.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.4/osx" "pigz-2.3.4-osx.tgz")
+#elseif(BUILD_LINUX)
+#    add_artifact("python2" "https://h1grid.com:443/artifactory/cbt/devtools/python/2.7.14/python-2.7.14-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "python/2.7.14/linux" "python-2.7.14-linux.tgz")
+#    add_artifact("ninja" "https://h1grid.com:443/artifactory/cbt/devtools/ninja/1.8.2/ninja-1.8.2-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "ninja/1.8.2/linux" "ninja-1.8.2-windows.tgz")
+#    add_artifact("pigz" "https://h1grid.com:443/artifactory/cbt/devtools/pigz/2.3.1/pigz-2.3.4-linux.tgz" ${ARTIFACT_TOOLSETS_CACHE} "pigz/2.3.4/linux" "pigz-2.3.4-windows.tgz")
+#endif()
 
 include(version)
 include(sourcemapprefix)
