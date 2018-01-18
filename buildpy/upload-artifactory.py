@@ -67,7 +67,7 @@ def main_inner(args):
         file = args.file
         url = args.url
 
-        upload(file, url, args.apikey, args.apipwd)
+        upload(file, url, args.apiuser, args.apipwd)
 
 def main():
 
