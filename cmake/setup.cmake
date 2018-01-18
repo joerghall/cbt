@@ -31,11 +31,14 @@ list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}/toolsets")
 list(INSERT CMAKE_MODULE_PATH 0 "${CMAKE_CURRENT_LIST_DIR}")
 
 #
-set(cbt_LOCATION ${CMAKE_CURRENT_LIST_DIR} CACHE PATH "CBT root location" FORCE)
+get_filename_component(cbt_LOCATION ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE)
 
-#
-set(download_COMMAND ${cbt_LOCATION}/scripts/download-command.cmake)
-set(untar_COMMAND ${cbt_LOCATION}/scripts/untar-command.cmake)
+# CMake scripts
+set(download_COMMAND ${cbt_LOCATION}/cmake/scripts/download-command.cmake)
+set(untar_COMMAND ${cbt_LOCATION}/cmake/scripts/untar-command.cmake)
+
+# Python scripts
+set(upload_py_COMMAND ${cbt_LOCATION}/buildpy/upload-artifactory.py)
 
 get_filename_component(temp_file_path ${CMAKE_CURRENT_LIST_DIR}/.. REALPATH)
 set(BUILD_TOOLS ${temp_file_path} CACHE PATH "Location of the buildtools" FORCE)
