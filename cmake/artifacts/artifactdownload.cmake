@@ -111,7 +111,11 @@ function(add_toolset PACKAGE VERSION)
 
     set(EXTENSION tgz)
     set(LOCATION_NAME ${PACKAGE})
-    set(PLATFORM ${BUILD_OS})
+    if (BUILD_LINUX)
+        set(PLATFORM linux)
+    else()
+        set(PLATFORM ${BUILD_OS})
+    endif()
     set(FILENAME "{PACKAGE}-{VERSION}-{PLATFORM}.{EXTENSION}")
     set(RELATIVE_PATH "{PACKAGE}/{VERSION}/{PLATFORM}")
 
