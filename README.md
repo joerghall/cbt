@@ -43,7 +43,7 @@ git config --global pull.rebase true
 
 ```bash
 git submodule add ../../joerghall/cbt.git _submodules/cbt
-git submodule init --update
+git submodule update --init
 ```
 
 
