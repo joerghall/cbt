@@ -36,7 +36,7 @@ get_filename_component(cbt_LOCATION ${CMAKE_CURRENT_LIST_DIR} DIRECTORY CACHE)
 # CMake scripts
 set(download_COMMAND ${cbt_LOCATION}/cmake/scripts/download-command.cmake)
 set(untar_COMMAND ${cbt_LOCATION}/cmake/scripts/untar-command.cmake)
-set(unzip_COMMAND ${cbt_LOCATION}/cmake/scripts/untar-command.cmake)
+set(tar_COMMAND ${cbt_LOCATION}/cmake/scripts/tar-command.cmake)
 
 # Python scripts
 set(upload_py_COMMAND ${cbt_LOCATION}/buildpy/upload-artifactory.py)

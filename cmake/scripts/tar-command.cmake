@@ -23,13 +23,13 @@
 #
 cmake_minimum_required(VERSION 3.0)
 
-get_filename_component(TARGET_PATH ${TARGET} DIRECTORY)
+get_filename_component(TARGET_PATH "${TARGET}" DIRECTORY)
 file(RELATIVE_PATH TARGET_NAME ${TARGET_PATH} ${TARGET})
 
-exec_program(${CMAKE_COMMAND} ${TARGET_PATH} ARGS -E tar czf ${SOURCE} ${TARGET_NAME} OUTPUT_VARIABLE output RETURN_VALUE result)
+exec_program(${CMAKE_COMMAND} ${TARGET_PATH} ARGS -E tar czf ${TARGET_NAME} ${SOURCE} OUTPUT_VARIABLE output RETURN_VALUE result)
 
 if(NOT result EQUAL 0)
     message(FATAL_ERROR "Failed to unpack ${SOURCE} to ${TARGET} with exitcode=${result} output:\n${output}")
 else()
-    message(STATUS "Unpacked ${SOURCE} to ${TARGET}")
+    message(STATUS "Packed ${SOURCE} to ${TARGET}")
 endif()
