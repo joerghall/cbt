@@ -24,23 +24,17 @@
 #
 cmake_minimum_required(VERSION 3.0)
 
-add_library(catch2 INTERFACE IMPORTED
+if(${CMAKE_VERSION} VERSION_GREATER "3.10.0")
+    include_guard(GLOBAL)
+endif()
 
-)
-
-#target_include_directories(catch2 [SYSTEM] [BEFORE]
-#    <INTERFACE|PUBLIC|PRIVATE> [items1...]
-#    [<INTERFACE|PUBLIC|PRIVATE> [items2...] ...]
-#)
-#
-#set_property(<GLOBAL                            |
-#    DIRECTORY [dir]                   |
-#    TARGET    [target1 [target2 ...]] |
-#    SOURCE    [src1 [src2 ...]]       |
-#    INSTALL   [file1 [file2 ...]]     |
-#    TEST      [test1 [test2 ...]]     |
-#    CACHE     [entry1 [entry2 ...]]>
-#    [APPEND] [APPEND_STRING]
-#    PROPERTY <name> [value1 [value2 ...]])
-#INTERFACE_INCLUDE_DIRECTORIES
-#INTERFACE_COMPILE_DEFINITIONS
+if(${catch2_LOCATION})
+    add_library(catch2 INTERFACE IMPORTED)
+    set_target_properties(catch2 PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES ${catch2_LOCATION}/include
+#        VERSION ${catch2_VERSION}
+#        CMAKE_CXX_STANDARD_REQUIRED
+    )
+else()
+    message(FATAL_ERROR "No catch2 location.")
+endif()

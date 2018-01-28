@@ -23,3 +23,18 @@
 # https://github.com/joerghall/cbt
 #
 cmake_minimum_required(VERSION 3.0)
+
+if(${CMAKE_VERSION} VERSION_GREATER "3.10.0")
+    include_guard(GLOBAL)
+endif()
+
+if(${catch2_LOCATION})
+    add_library(catch2 INTERFACE IMPORTED)
+    set_target_properties(catch2 PROPERTIES
+        INTERFACE_INCLUDE_DIRECTORIES ${catch2_LOCATION}/include
+        #        VERSION ${catch2_VERSION}
+        #        CMAKE_CXX_STANDARD_REQUIRED
+        )
+else()
+    message(FATAL_ERROR "No catch2 location.")
+endif()
