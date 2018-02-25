@@ -121,7 +121,54 @@ function(add_toolset PACKAGE VERSION)
 
     set(artifactory_configuration default)
     set(artifactory ${${artifactory_configuration}_ARTIFACTORY})
-    set(artifactory_url https://h1grid.com/artifactory/cbt/devtools/${PACKAGE}/${VERSION}/${PACKAGE}-${VERSION}-${PLATFORM}.{EXTENSION})
+    set(artifactory_url https://h1grid.com/artifactory/cbt/tools/${PACKAGE}/${VERSION}/${PACKAGE}-${VERSION}-${PLATFORM}.{EXTENSION})
+    set(artifactory_version 1)
+    set(artifactory_cache ${ARTIFACT_TOOLSETS_CACHE})
+
+    # Find all optional parameters name=value and update variables
+    foreach (arg ${ARGN})
+        string(REGEX MATCHALL "^([a-zA-Z_]+)=(.*)$" matched ${arg})
+        set(key ${CMAKE_MATCH_1})
+        set(value ${CMAKE_MATCH_2})
+
+        if (matched)
+            set(valid_names "|PLATFORM|BRANCH|BITNESS|OPTIMIZATION||CONFIG|EXTENSION|FILENAME|RELATIVE_PATH")
+            # Validate the name
+            if (key MATCHES "^(|${valid_names})$|")
+                set(${key} ${value})
+            else ()
+                message(FATAL_ERROR "Invalid key name ${key} allowed ${valid_names}")
+            endif()
+        else ()
+            message(FATAL_ERROR "Unprocessed argument ${arg} - '${key}'='${value}'")
+        endif ()
+    endforeach ()
+
+    # Build final parameter list
+    replace_parameter("${artifactory_url}" artifactory_url)
+    replace_parameter("${FILENAME}" file_name)
+    replace_parameter("${RELATIVE_PATH}" file_path)
+
+    #
+    add_artifact("${LOCATION_NAME}" "${artifactory_url}" "${ARTIFACT_TOOLSETS_CACHE}" "${file_path}" "${file_name}")
+
+endfunction()
+
+function(add_component PACKAGE VERSION)
+
+    set(EXTENSION tgz)
+    set(LOCATION_NAME ${PACKAGE})
+    if (BUILD_LINUX)
+        set(PLATFORM linux)
+    else()
+        set(PLATFORM ${BUILD_OS})
+    endif()
+    set(FILENAME "{PACKAGE}-{VERSION}-{PLATFORM}.{EXTENSION}")
+    set(RELATIVE_PATH "{PACKAGE}/{VERSION}/{PLATFORM}")
+
+    set(artifactory_configuration default)
+    set(artifactory ${${artifactory_configuration}_ARTIFACTORY})
+    set(artifactory_url https://h1grid.com/artifactory/cbt/component/${PACKAGE}/${VERSION}/${PACKAGE}-${VERSION}-${PLATFORM}.{EXTENSION})
     set(artifactory_version 1)
     set(artifactory_cache ${ARTIFACT_TOOLSETS_CACHE})
 

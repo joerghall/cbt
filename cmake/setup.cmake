@@ -56,7 +56,7 @@ if (APPLE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
     set(BUILD_PLATFORM "osx${CMAKE_OSX_DEPLOYMENT_TARGET}" CACHE STRING "Platform of the build" FORCE)
 elseif (UNIX)
-    set(BUILD_PLATFORM ${BUILD_OS}${BUILD_OS_VERSION} CACHE STRING "Platform of the build" FORCE)
+    set( ${BUILD_OS}${BUILD_OS_VERSION} CACHE STRING "Platform of the build" FORCE)
 endif ()
 
 if (CMAKE_CONFIGURATION_TYPES)
