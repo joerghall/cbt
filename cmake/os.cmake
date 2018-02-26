@@ -85,3 +85,9 @@ else ()
     message(FATAL_ERROR "Unsupported OS version")
 
 endif ()
+
+if (CMAKE_BUILD_TYPE MATCHES "DEBUG")
+    set(BUILD_DEBUG 1)
+else ()
+    set(BUILD_RELEASE 1)
+endif()
